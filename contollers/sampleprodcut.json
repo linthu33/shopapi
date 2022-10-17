@@ -1,0 +1,32 @@
+{
+    "title": "genstone product",
+    "image": [
+        {
+            "path": "E:\\JwewlleryProject\\BackEnd\\img\\02.png",
+            "url": "E:\\JwewlleryProject\\BackEnd\\img\\02.png",
+            "caption": "genstone"
+        }
+    ],
+    "certification": "yes",
+    "returnPolicy": "yes",
+    "freeshipping": "yes",
+    "productCode": "12345",
+    "reviewPoint": "1",
+    "availabity": "true",
+    "price": "$5000",
+    "ringsize": [
+        {
+            "country": "US",
+            "sizecategory": [
+                {
+                    "size": "5.6"
+                }
+            ]
+        }
+    ],
+    "freeEngaving": "no",
+    "numcount": "10",
+    "description": "free",
+    "Specification": "good",
+    "category": "genstone"
+}

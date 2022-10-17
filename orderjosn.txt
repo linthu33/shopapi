@@ -1,0 +1,37 @@
+{
+    "fullName": "ko",
+    "address": [
+        {
+            "phone": "098766",
+            "city": "Yangon",
+            "state": "Yangon",
+            "postal": "236",
+            "country": "Maynamar"
+        }
+    ],
+    "isDefault": "String",
+    "orderdate": "4/4/2022",
+    "requireDate": "4/4/2022",
+    "status": "",
+    "totalquantity": 5,
+    "producttax": 5,
+    "ShippingDate": "",
+    "shippingmethod": "",
+    "nameOnCard": "",
+    "cardNumber": "",
+    "expiryDate": "",
+    "cvv": "",
+    "remark": "please you are ",
+    "pricelist": [
+        {
+            "quantity": 5,
+            "price": 500,
+            "totalprice": 2500
+        }
+    ],
+    "productid": [
+        
+        "62bfda64717f0c17d7bc072c",
+        "62bfda64717f0c17d7bc072c"
+    ]
+}
