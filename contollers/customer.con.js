@@ -1,19 +1,29 @@
 const CustomerModel = require("../models/Customer.model");
+const jwt = require("jsonwebtoken");
 exports.create = async (req, res, next) => {
   try {
-    console.log(req.body)
-    const { fullName,email,password,address } = req.body;
+    const { fullName,email,password,phone,role,author } = req.body;
     const userExits=await CustomerModel.findOne({email});
     if(userExits){
       return res.json({ message: "User already exists" });
     }
     else{
-      const customeradata = new CustomerModel({
+      const customeradata =await  CustomerModel({
         fullName,
         email,
         password,
-        address: arraypush(address),
+        phone,
+        role,
+        download:[],
+        recent:[],
+        //author:arraypush(author),
       });
+      if(author.length != 0){
+      
+        customeradata.author=author;
+      }
+    
+     
       await customeradata.save();
       return res.status(200).json({      
         Customer: customeradata,

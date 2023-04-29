@@ -4,62 +4,49 @@ const Category = require("../models/categories.model");
 const ProductSchema = mongoose.Schema(
   {
     title: String,
-    experDate: { type: Date, default: Date.now },
     images: [],
-    color: String,
-    brand: {
-      name: String,
-      img: String,
-    },
-    shipping: {
-      weigh: Number,
-      dimensions: {
-        width: Number,
-        height: Number,
-        depth: Number,
-      },
-    },
-    description: [
-      {
-        lang: String,
-        details: String,
-      },
-    ],
+    description: String,
     reviewPoint: {
       username: String,
       count: Number,
     },
-    certification: String,
-    returnPolicy: String,
     sublabel: String,
-    pricetype: [
-      {
-        pricepackagename: String, 
-        pickagetype:String,
-        list: Number, //15000 2000
-        sellprice: Number,
-        buyprice: Number,
-        Quantity: Number, //100 100
-        sellquantity: Number, //50 0
-        indate: String,
-        unittype:String,
-        quantitype:String
-
-      },
-    ] /* {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "PriceType",
-      require: true,
-    } */,
-    maincategory_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      require: true,
+    price: Number,
+    sellbook: {
+      quantity: Number,
+      sellprice: Number,
     },
+    discount: Number,
+    booktype: String,
+    epubLocator: [
+      {
+        bookId: String,
+        href: String,
+        created: String,
+        locations: String,
+      },
+    ],
+    author: [
+      {
+        auid: String,
+        name: String,
+        about: String,
+      },
+    ],
+
+    publicationdate: String,
+    comment: [
+      {
+        userid: String,
+        name: String,
+        postcomment: String,
+      },
+    ],
+    maincategory:String
   },
   {
     timestamps: true,
   }
 );
-
+ProductSchema.index({ "$**": "text" });
 module.exports = mongoose.model("Product", ProductSchema);

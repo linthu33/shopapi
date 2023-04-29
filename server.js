@@ -30,7 +30,7 @@ app.use("/uploads", express.static("uploads"));
 //#region  Route
 require("./routes/routes")(app);
 //#endregion
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5050;
 // Have Node serve the files for our built React app
 app.get("/", (req, res) => {
   res.json({

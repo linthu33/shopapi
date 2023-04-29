@@ -8,8 +8,8 @@ var storage = multer.diskStorage({
   },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    if (ext !== ".jpg" || ext !== ".png") {
-      return cb(res.status(400).end("only jpg, png are allowed"), false);
+    if (ext !== ".epub") {
+      return cb(res.status(400).end("only epub are allowed"), false);
     }
     cb(null, true);
   },
@@ -19,8 +19,8 @@ var upload = multer({ storage: storage }).array("file");
 //=================================
 //             Product
 //=================================
-exports.uploadImage = (req, res, next) => {
-  console.log("upload img");
+exports.uploadepub = (req, res, next) => {
+  console.log("upload epub");
   console.log(req.body.file);
   upload(req, res, (err) => {
     if (err) {
@@ -28,8 +28,6 @@ exports.uploadImage = (req, res, next) => {
     }
     return res.json({
       success: true,
-      //image: res.req.file.path,
-      //fileName: res.req.file.filename,
     });
   });
 };

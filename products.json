@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "6415540cf8534bc527ee4227"
+  },
+  "title": "education",
+  "images": [],
+  "description": "ကလေးစာပေလောကအတွက် ကောင်းပါတယ်",
+  "reviewPoint": {
+    "username": "မောင်မောင်",
+    "count": 12
+  },
+  "sublabel": "မရှိ",
+  "sellbook": {
+    "quantity": 50,
+    "sellprice": 12
+  },
+  "discount": 100,
+  "booktype": "မြန်မာ",
+  "epubLocator": [
+    {
+      "bookId": "String",
+      "href": "String",
+      "created": "String",
+      "locations": "String",
+      "_id": {
+        "$oid": "6415540cf8534bc527ee4228"
+      }
+    }
+  ],
+  "author": [
+    {
+      "name": "မြသန်းတင့်",
+      "about": "",
+      "_id": {
+        "$oid": "6415540cf8534bc527ee4229"
+      }
+    }
+  ],
+  "publicationdate": "၁၂/၁၂/၂၀၁၉",
+  "comment": [
+    {
+      "name": "အမည်မသိ",
+      "postcomment": "pdf ပြောင်းလို့မရပါ",
+      "_id": {
+        "$oid": "6415540cf8534bc527ee422a"
+      }
+    }
+  ],
+  "maincategory": "ပညာရေး",
+  "createdAt": {
+    "$date": "2023-03-18T06:02:52.443Z"
+  },
+  "updatedAt": {
+    "$date": "2023-03-18T06:02:52.443Z"
+  },
+  "__v": 0
+}]
