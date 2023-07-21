@@ -1,7 +1,7 @@
 
 const jwt = require("jsonwebtoken");
 const CustomerModel = require("../models/Customer.model");
-const taxModel = require("../models/tax.model");
+
 
 module.exports = (app) => {
   const product_com = require("../contollers/product.com");
@@ -9,9 +9,9 @@ module.exports = (app) => {
   const fileupload = require("../contollers/fileupload.con");
   const orderproduct = require("../contollers/orderporoduct.controller");
   const customercon = require("../contollers/customer.con");
-  const taxcon = require("../contollers/tax.controller");
+
   const sellercon = require("../contollers/seller.controller");
-  const gluecon=require("../contollers/glue.controller");
+  
   //#region User route
 
   app.post("/register", customercon.create);
@@ -24,12 +24,12 @@ module.exports = (app) => {
       });
       //console.log(customeruser)
       if (!customer) {
-        return res.json({ message: "User doesn't exist" });
+        return res.json({ loginResult: {token:"",customer:""} });
       } else {
         //console.log(customeruser.password);
         if ( password !== customer.password) {
          
-          return res.json({ message: "Password Incorrect" });
+          return res.json({ loginResult: {token:"",customer:""} });
         }
         const payload = {
          
@@ -38,7 +38,8 @@ module.exports = (app) => {
      // console.log(customeruser);
       jwt.sign(payload, "secret", (err, token) => {
           if (err) console.log(err);
-          else return res.json({ token: token,customer });
+         // else return res.json({  token: token,customer });
+         else return res.json({ loginResult: {token:token,customer:customer} })
       });
       }
     /* } catch (err) {
@@ -49,24 +50,37 @@ module.exports = (app) => {
   //#endregion
 
   //#region  upload image for product
-  app.post("/uploadImage", fileupload.uploadImage);
+  app.post("/uploadepub", fileupload.uploadepub);
 
+  //#region Category Contoller
   //#region Category Contoller
   app.post("/createcategory", category_com.create);
   app.get("/findOnecategory", category_com.findOne);
   app.get("/findAllcategory", category_com.findAll);
-  app.get("/tax", taxcon.findAlltax);
+
   //#endregion
   //#region Product Contoller
   app.get("/findidprod/:id", product_com.findidprod);
   app.get("/findOneprod/:id", product_com.findOneprod);
+  app.post("/search", product_com.searchany);
   app.get("/findsubandtitleprod/:query", product_com.findsubandtitleprod);
-  app.get("/sortprod/:query", product_com.sortprod);
-  app.get("/findAllprod", product_com.findAllprod);
+  app.post("/sortprod", product_com.sortprod);
+  app.get("/newarrivel", product_com.newarrivel);
+  app.post("/findAllprod", product_com.findAllprod);
   app.post("/createprod", product_com.createprod);
   app.post("/editprod", product_com.updateprod);
   app.delete("/deleteprod/:id", product_com.deleteprod);
-  app.get("/groupbybrand", product_com.GroupbyBarndprod);
+  app.get("/groupbybrand", product_com.GroupbyBarndprod); 
+  app.post("/findcategory", product_com.find_sub_category);
+  app.post("/authorPro", product_com.authorPro);
+  app.post("/authorsearch", product_com.authorsearchany);
+  app.post("/updatepro", product_com.updateprod);
+  app.post("/cutomerdownlist", product_com.cutomerProductlist);
+  app.post("/cutomerrecentlist", product_com.cutomerrecentlist);
+  app.post("/commentupdate", product_com.updateComment);
+  app.get("/themostpopular", product_com.findthemostpopular);
+
+  
   
   //#endregion
   //#region Order to Product Route
@@ -84,6 +98,8 @@ module.exports = (app) => {
   app.get("/customerfindall", customercon.findall);
   
   app.post("/customerupdate", customercon.update);
+  app.post("/recentupdate", customercon.recentupdate);
+  app.post("/downloadupdate", customercon.downloadupdate);
   /*  app.post('/opupdate',orderproduct.opupdate);
    */
   //#endregion
@@ -93,7 +109,6 @@ module.exports = (app) => {
   app.post("/sellerUpdate", sellercon.depUpdate); 
   app.get("/sellerdelete/:id", sellercon.depDelete);
   //for glue
-  app.post("/glue",gluecon.create); 
-  app.get("/glueFindAll", gluecon.findAll);
+
  
 };

@@ -1,22 +1,29 @@
 const moongoose = require("mongoose");
-//const Address = require("../models/address.model").AddressSchema;
 const CustomerSchema = moongoose.Schema(
   {
     fullName: String,
     email:String,
     password:String,
-    isDefault:String,
-    address: [
+    phone: String,
+    role:String,
+    author: [
       {
-        phone: String,
+        authorname:String,
+        birthday:String,
+        about:String,
         city: String,
         state: String,
         postal: String,
         country:String,
         homenumber:String,
+        email:String,
         isDefault:String,
+        phone: String,
+       
       }
     ],
+    download:[],
+    recent:[],
    
    
   },

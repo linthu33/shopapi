@@ -6,13 +6,7 @@ const sublabelSchema = mongoose.Schema({
 
 const CategorySchema = mongoose.Schema({
   maincategory: String,
-  subcategory: [
-    {
-      subcatname: String,
-      //sublabel: [sublabelSchema],
-    },
-  ],
-  //subcategory: { type: [Subcategory] }
+  subcategory:[]
 });
 
 module.exports = mongoose.model("Category", CategorySchema);

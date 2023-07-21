@@ -4,32 +4,53 @@ var storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
+    cb(null, `${file.originalname}`);
   },
-  fileFilter: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    if (ext !== ".jpg" || ext !== ".png") {
-      return cb(res.status(400).end("only jpg, png are allowed"), false);
+ /*  fileFilter: (req, file, cb) => {
+    console.log(file.mimetype)
+    const allowedMimes = ['image/jpeg', 'image/jpg', 'image/gif'];
+     const ext = path.extname(file.originalname);
+  
+    console.log(req.file.mimetype)
+    if (allowedMimes.includes(file.mimetype)) {
+      return cb(res.status(400).end("only epub are allowed"), false);
     }
     cb(null, true);
-  },
+  }, */
 });
+//file filter for extention
+let fileFilter = function (req, file, cb) {
+  console.log(file.mimetype)
+  const allowedMimes = ['application/epub+zip'];
+
+  if (allowedMimes.includes(file.mimetype)) {
+      cb(null, true);
+  } else {
+      cb(null, false);
+      return cb(new Error('Only epub format allowed!'));
+  }
+};
 //multiple img upload
-var upload = multer({ storage: storage }).array("file");
+var upload = multer({ 
+  storage: storage,
+  // fileFilter: fileFilter
+ }).array("file");
 //=================================
 //             Product
 //=================================
-exports.uploadImage = (req, res, next) => {
-  console.log("upload img");
-  console.log(req.body.file);
+exports.uploadepub = (req, res, next) => {
+  console.log("upload epub");
+ 
   upload(req, res, (err) => {
     if (err) {
-      return res.json({ success: false, err });
+      return res.json({ status: false, err });
     }
-    return res.json({
-      success: true,
-      //image: res.req.file.path,
-      //fileName: res.req.file.filename,
-    });
+    else{
+      return res.json({
+        status: true,
+        file:req.file
+      });
+    }
+   
   });
 };

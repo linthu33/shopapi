@@ -2,7 +2,7 @@ const CustomerModel = require("../models/Customer.model");
 exports.create = async (req, res, next) => {
   try {
     console.log(req.body)
-    const { fullName,email,password,address } = req.body;
+    const { fullName,email,password,role,phone} = req.body;
     const userExits=await CustomerModel.findOne({email});
     if(userExits){
       return res.json({ message: "User already exists" });
@@ -12,7 +12,11 @@ exports.create = async (req, res, next) => {
         fullName,
         email,
         password,
-        address: arraypush(address),
+        phone,
+        role,
+        download:[],
+        recent:[],
+        //author: arraypush(author),
       });
       await customeradata.save();
       return res.status(200).json({      
@@ -50,15 +54,52 @@ exports.findall = async (req, res, next) => {
 };
 exports.update = async (req, res, next) => {
   try {
-    console.log(req.body.password);
+    console.log(req.body);
     const updatedata = await CustomerModel.findByIdAndUpdate(req.body.id, {
       fullName: req.body.fullName,
       password:req.body.password,          
-      
-      address: arraypush(address),
+      author:arraypush(req.body.author)
+     // address: arraypush(address),
+    }
+    
+    );
+    return res.status(200).json({      
+      Customer: updatedata,
     });
   } catch (err) {
     res.status(500).send(err);
+  }
+};
+
+exports.recentupdate = async (req, res) => {
+  try {
+    const add_recentlist = await CustomerModel.findByIdAndUpdate(
+      { _id: req.body.id },
+      //{ $push: { recent: req.body.recent } },
+      { $push: { recent: {$each:req.body.recent}  } },
+      { new: true }
+    );
+    res.status(200).json({ Customer: add_recentlist })
+  } catch (error) {
+    res.status(400).json({
+      message: "do not sucessfully",
+    });
+  }
+};
+exports.downloadupdate = async (req, res) => {
+  try {
+    const downloadlist = await CustomerModel.findByIdAndUpdate(
+      { _id: req.body.id },
+     // { $push: { download: req.body.download } },
+     { $push: { download: {$each:req.body.download}  } },
+      { new: true }
+    );
+    res.status(200).json({ Customer: downloadlist })
+  } catch (error) {
+    res.status(400).json({
+      
+      message: "do not sucessfully",
+    });
   }
 };
 function arraypush(arr) {
